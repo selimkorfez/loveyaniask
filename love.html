@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You ❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            z-index: 10;
+        }
+
+        h1 {
+            color: white;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .love-button {
+            background: linear-gradient(45deg, #ff6b6b, #ff8787);
+            color: white;
+            border: none;
+            padding: 20px 50px;
+            font-size: 1.5em;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .love-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.6);
+        }
+
+        .love-button:active {
+            transform: scale(0.95);
+        }
+
+        .floating-text {
+            position: fixed;
+            font-size: 2em;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            pointer-events: none;
+            animation: float-up 3s ease-out forwards;
+            z-index: 1;
+        }
+
+        .heart {
+            position: fixed;
+            font-size: 3em;
+            pointer-events: none;
+            animation: float-up 3s ease-out forwards;
+            z-index: 1;
+        }
+
+        @keyframes float-up {
+            0% {
+                opacity: 1;
+                transform: translateY(0) rotate(0deg) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-500px) rotate(360deg) scale(1.5);
+            }
+        }
+
+        .sparkle {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: sparkle 1.5s ease-out forwards;
+            z-index: 1;
+        }
+
+        @keyframes sparkle {
+            0% {
+                opacity: 1;
+                transform: scale(0);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Click if you're the most amazing person ever! 💕</h1>
+        <button class="love-button" onclick="showLove()">Click Me!</button>
+    </div>
+
+    <script>
+        const loveMessages = [
+            "I LOVE YOU ❤️",
+            "YOU'RE AMAZING 💖",
+            "YOU'RE BEAUTIFUL 💕",
+            "MY EVERYTHING 💗",
+            "FOREVER YOURS 💝",
+            "YOU'RE PERFECT 💓",
+            "I ADORE YOU 💞",
+            "MY WORLD 🌎",
+            "YOU'RE THE BEST 🌟",
+            "THINKING OF YOU 💭"
+        ];
+
+        const hearts = ["❤️", "💕", "💖", "💗", "💝", "💓", "💞", "💘", "💟", "♥️"];
+
+        function showLove() {
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => {
+                    createFloatingText();
+                    createHeart();
+                    createHeart();
+                }, i * 100);
+            }
+            
+            createSparkles();
+        }
+
+        function createFloatingText() {
+            const text = document.createElement('div');
+            text.className = 'floating-text';
+            text.textContent = loveMessages[Math.floor(Math.random() * loveMessages.length)];
+            text.style.left = Math.random() * window.innerWidth + 'px';
+            text.style.top = window.innerHeight - 100 + 'px';
+            text.style.color = `hsl(${Math.random() * 60 + 320}, 100%, ${Math.random() * 20 + 70}%)`;
+            document.body.appendChild(text);
+
+            setTimeout(() => {
+                text.remove();
+            }, 3000);
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+            heart.style.left = Math.random() * window.innerWidth + 'px';
+            heart.style.top = window.innerHeight - 50 + 'px';
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 3000);
+        }
+
+        function createSparkles() {
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const sparkle = document.createElement('div');
+                    sparkle.className = 'sparkle';
+                    sparkle.style.left = Math.random() * window.innerWidth + 'px';
+                    sparkle.style.top = Math.random() * window.innerHeight + 'px';
+                    document.body.appendChild(sparkle);
+
+                    setTimeout(() => {
+                        sparkle.remove();
+                    }, 1500);
+                }, i * 50);
+            }
+        }
+    </script>
+</body>
+</html>
